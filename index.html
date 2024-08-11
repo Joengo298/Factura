@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factura Electrónica</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div id="logo">
+        <img src="logo.png" alt="Logo Empresa" />
+      </div>
+      <h1>Factura Electrónica</h1>
+    </header>
+
+    <main>
+      <section id="datos-generales">
+        <h2>Datos Generales</h2>
+        <form id="factura-form">
+          <div class="form-group">
+            <label for="establecimiento">Establecimiento:</label>
+            <input
+              type="text"
+              id="establecimiento"
+              name="establecimiento"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="fecha-emision">Fecha de emisión:</label>
+            <input
+              type="date"
+              id="fecha-emision"
+              name="fecha-emision"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="tipo-dte">Tipo de DTE:</label>
+            <select id="tipo-dte" name="tipo-dte" required>
+              <option value="factura">Factura</option>
+              <option value="recibo">Recibo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="moneda">Moneda:</label>
+            <select id="moneda" name="moneda" required>
+              <option value="GTQ">GTQ - Quetzal</option>
+              <option value="USD">USD - Dólar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nit">NIT del receptor (C/F):</label>
+            <input type="text" id="nit" name="nit" required />
+          </div>
+        </form>
+      </section>
+
+      <section id="items">
+        <h2>Items</h2>
+        <table id="items-table">
+          <thead>
+            <tr>
+              <th>B/S</th>
+              <th>Cantidad</th>
+              <th>Descripción</th>
+              <th>P. Unitario (Q)</th>
+              <th>Descuento (%)</th>
+              <th>Total (Q)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" value="Zapato" name="bs" /></td>
+              <td>
+                <input
+                  type="number"
+                  value="2"
+                  name="cantidad"
+                  class="cantidad"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value="Zapato Deportivo Hombre"
+                  name="descripcion"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="250.00"
+                  name="precio-unitario"
+                  class="precio-unitario"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="0"
+                  name="descuento"
+                  class="descuento"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="500.00"
+                  name="total"
+                  class="total"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Sandalia" name="bs" /></td>
+              <td>
+                <input
+                  type="number"
+                  value="1"
+                  name="cantidad"
+                  class="cantidad"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input type="text" value="Sandalia Mujer" name="descripcion" />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="100.00"
+                  name="precio-unitario"
+                  class="precio-unitario"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="0"
+                  name="descuento"
+                  class="descuento"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="100.00"
+                  name="total"
+                  class="total"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Botas" name="bs" /></td>
+              <td>
+                <input
+                  type="number"
+                  value="1"
+                  name="cantidad"
+                  class="cantidad"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value="Botas de Invierno"
+                  name="descripcion"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="400.00"
+                  name="precio-unitario"
+                  class="precio-unitario"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="12"
+                  name="descuento"
+                  class="descuento"
+                  oninput="calcularTotal(this)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  value="350.00"
+                  name="total"
+                  class="total"
+                  readonly
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="resumen">
+        <h2>Resumen de la Compra</h2>
+        <table id="resumen-table">
+          <tr>
+            <td>Subtotal:</td>
+            <td id="subtotal">Q 950.00</td>
+          </tr>
+          <tr>
+            <td>Descuento Total:</td>
+            <td id="descuento-total">Q 50.00</td>
+          </tr>
+          <tr>
+            <th>Total a Pagar:</th>
+            <th id="total-pagar">Q 900.00</th>
+          </tr>
+        </table>
+      </section>
+
+      <button type="submit" id="vista-previa">Vista Previa</button>
+    </main>
+
+    <footer>
+      <p>© 2024 Mi Empresa</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
